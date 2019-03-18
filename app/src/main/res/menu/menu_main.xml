@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuItemAdd"
+        android:title="@string/menu_add"
+        android:orderInCategory="88810"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menuItemEdit"
+        android:title="@string/menu_edit"
+        android:orderInCategory="88820"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menuItemRemove"
+        android:title="@string/menu_remove"
+        android:orderInCategory="88830"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menuItemRotateScreen"
+        android:title="@string/menu_rotate"
+        android:orderInCategory="88840"
+        app:showAsAction="ifRoom"/>
+
+
+</menu>

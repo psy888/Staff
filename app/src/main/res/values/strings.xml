@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Список сотрудников</string>
+
+    <!--Menu items -->
+    <string name="menu_add">Добавить</string>
+    <string name="menu_edit">Ркдактировать</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="menu_rotate">Повернуть экран</string>
+
+    <!--Dialog Box -->
+    <string name="dialog_firstName">Имя</string>
+    <string name="dialog_lastName">Фамилия</string>
+    <string name="dialog_gender">Пол</string>
+    <string name="dialog_birthDate">Дата рождения</string>
+    <string name="dialog_btnNegative">Отменить</string>
+    <string name="dialog_btnPositive">Применить</string>
+
+    <!-- Human -->
+    <string name="human_genderMale">Мужской</string>
+    <string name="human_genderFemale">Женский</string>
+
+
+</resources>
