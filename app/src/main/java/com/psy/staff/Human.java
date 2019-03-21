@@ -1,8 +1,9 @@
 package com.psy.staff;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-class Human
+class Human implements Serializable
 {
     public String mFirstName;
     public String mLastName;

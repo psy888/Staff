@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,11 +24,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+
+//    File base = new File("base.b");
+    private static final String BASE = "base.b";
     /**
      * KEYS
      */
@@ -75,6 +87,17 @@ public class MainActivity extends AppCompatActivity {
             firstVisibleItem = savedInstanceState.getInt(FIRST_VISIBLE_ITEM);
             mCurSelectedPos = savedInstanceState.getInt(CURRENT_SELECTED_ITEM_POS);
 
+        }
+        if(mStaff==null)//&&base.exists())
+        {
+            try {
+                FileInputStream FIS = openFileInput(BASE);
+                ObjectInputStream OIS = new ObjectInputStream(FIS);
+                mStaff = (ArrayList<Human>) OIS.readObject();
+                OIS.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         //-------------------------------------ADAPTERS-------------------------------------------------
 
@@ -223,6 +246,24 @@ public class MainActivity extends AppCompatActivity {
         outState.putSerializable(STAFF_LIST,mStaff);
         outState.putInt(FIRST_VISIBLE_ITEM, mLvStaff.getFirstVisiblePosition());
         outState.putInt(CURRENT_SELECTED_ITEM_POS, mCurSelectedPos);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        try {
+            FileOutputStream FOS = openFileOutput(BASE, MODE_PRIVATE);
+//                    new FileOutputStream(base);
+//            DataOutputStream DOS = new DataOutputStream(FOS);
+            ObjectOutputStream OOS = new ObjectOutputStream(FOS);
+            OOS.writeObject(mStaff);
+            OOS.flush();
+            OOS.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("ON DESTROY", e.getMessage());
+        }
     }
 
     //----------------------------------------HELPER METHODS---------------------------------------
