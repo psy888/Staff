@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--List item -->
+    <dimen name="listItemHeight">50dp</dimen>
+    <dimen name="listItemFontSize">12sp</dimen>
+
+    <!--Dialog Box -->
+    <dimen name="dialogRowLabel">24sp</dimen>
+    <dimen name="dialogRowMargin">8dp</dimen>
+</resources>

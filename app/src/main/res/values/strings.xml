@@ -11,13 +11,18 @@
     <string name="dialog_firstName">Имя</string>
     <string name="dialog_lastName">Фамилия</string>
     <string name="dialog_gender">Пол</string>
-    <string name="dialog_birthDate">Дата рождения</string>
+    <string name="dialog_birthDate">Дата рожд.</string>
     <string name="dialog_btnNegative">Отменить</string>
     <string name="dialog_btnPositive">Применить</string>
+    <string name="dialog_titleAdd">Добавить сотрудника</string>
+    <string name="dialog_titleEdit">Редактировать сотрудника</string>
 
     <!-- Human -->
     <string name="human_genderMale">Мужской</string>
     <string name="human_genderFemale">Женский</string>
 
-
+    <!--Toast -->
+    <string name="nothig_selected">Сотрудник не выбран!</string>
+    <string name="toast_warning_birthDate">Дата рождения указана некоректно</string>
+    <string name="toast_warning_emptyField">Фамилия и Имя не могут быть пустыми</string>
 </resources>

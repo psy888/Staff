@@ -21,7 +21,7 @@
         android:id="@+id/menuItemRotateScreen"
         android:title="@string/menu_rotate"
         android:orderInCategory="88840"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 
 </menu>

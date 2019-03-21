@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
+
+    <TableRow
+        android:layout_margin="@dimen/dialogRowMargin">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/dialog_firstName"
+            android:gravity="start"
+            android:textSize="@dimen/dialogRowLabel"/>
+        <EditText
+            android:inputType="text"
+            android:maxLines="1"
+            android:id="@+id/etFirstName"/>
+    </TableRow>
+    <TableRow
+        android:layout_margin="@dimen/dialogRowMargin">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/dialog_lastName"
+            android:gravity="start"
+            android:textSize="@dimen/dialogRowLabel"/>
+        <EditText
+            android:id="@+id/etLastName"
+            android:inputType="text"
+            android:maxLines="1"/>
+    </TableRow>
+    <TableRow
+        android:layout_margin="@dimen/dialogRowMargin">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:text="@string/dialog_gender"
+            android:gravity="start"
+            android:textSize="@dimen/dialogRowLabel"/>
+        <Spinner
+            android:layout_gravity="center_vertical"
+            android:id="@+id/spGender"/>
+    </TableRow>
+    <TableRow
+        android:layout_margin="@dimen/dialogRowMargin">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:text="@string/dialog_birthDate"
+            android:gravity="start"
+            android:textSize="@dimen/dialogRowLabel"/>
+        <DatePicker
+            android:layout_gravity="center_vertical"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:id="@+id/dpBirthDate">
+        </DatePicker>
+    </TableRow>
+
+
+
+</TableLayout>
