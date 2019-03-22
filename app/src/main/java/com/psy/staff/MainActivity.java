@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     mCurSelectedView.setBackgroundColor(getResources().getColor(mNrmlColor));
                 }
-                if(mCurSelectedPos ==position)
+                if(mCurSelectedPos == position)
                 {
                     //снимаем выделение с текущего элемента если нажат повторно
                     mCurSelectedView.setBackgroundColor(getResources().getColor(mNrmlColor));
@@ -420,7 +420,10 @@ public class MainActivity extends AppCompatActivity {
             msg = "Сотрудник " +
                     selHuman.mLastName + " " +
                     selHuman.mFirstName + " уделен.";
+            mCurSelectedPos =-1;
+            mCurSelectedView = null;
             adapter.remove(selHuman);
+
         }
         else {
             msg = getResources().getString(R.string.nothig_selected);
