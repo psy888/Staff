@@ -35,6 +35,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String CURRENT_SELECTED_ITEM_POS = "currentSelectedItemPosition";
 
 
+    private int SCREEN_ORIENTATION;
     /**
      * Список сотрудников
      */
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if(savedInstanceState!=null)
         {
             mStaff = (ArrayList<Human>) savedInstanceState.getSerializable(STAFF_LIST);
@@ -88,8 +92,9 @@ public class MainActivity extends AppCompatActivity {
             mCurSelectedPos = savedInstanceState.getInt(CURRENT_SELECTED_ITEM_POS);
 
         }
-        if(mStaff==null)//&&base.exists())
+        if(mStaff==null)//&&base.exists())\
         {
+            Byte[] buf = new Byte[32];
             try {
                 FileInputStream FIS = openFileInput(BASE);
                 ObjectInputStream OIS = new ObjectInputStream(FIS);
@@ -207,13 +212,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-            menu.findItem(R.id.menuItemRotateScreen).setIcon(R.drawable.twotone_rotate_right_white_18dp);
-        }
-        else
-        {
-            menu.findItem(R.id.menuItemRotateScreen).setIcon(R.drawable.twotone_rotate_left_white_18dp);
-        }
+        menu.findItem(R.id.menuItemRotateScreen).setIcon(R.drawable.twotone_screen_rotation_white_24);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -233,6 +233,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menuItemRotateScreen:
                 rotateScreen();
+                break;
+            case R.id.addDummyData:
+                addDummyData();
                 break;
             default:
                 break;
@@ -379,9 +382,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, R.string.toast_warning_emptyField, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                editableHuman.mFirstName = etFirstName.getText().toString().substring(0,0).toUpperCase() +
+                editableHuman.mFirstName = etFirstName.getText().toString().substring(0,1).toUpperCase() +
                         etFirstName.getText().toString().substring(1);
-                editableHuman.mLastName = etLastName.getText().toString().substring(0,0).toUpperCase() +
+                editableHuman.mLastName = etLastName.getText().toString().substring(0,1).toUpperCase() +
                         etLastName.getText().toString().substring(1);;
                 editableHuman.mGender = ((Gender) spGender.getSelectedItem()).mGender;
                 if(tmpBirthDate.getTimeInMillis()>System.currentTimeMillis())
@@ -409,15 +412,20 @@ public class MainActivity extends AppCompatActivity {
 
     void removeHuman()
     {
+        String msg;
         if(mCurSelectedPos!=-1)
         {
             ArrayAdapter<Human> adapter = (ArrayAdapter<Human>) mLvStaff.getAdapter();
             Human selHuman =adapter.getItem(mCurSelectedPos);
-            Toast.makeText(MainActivity.this, "Сотрудник " +
+            msg = "Сотрудник " +
                     selHuman.mLastName + " " +
-                    selHuman.mFirstName + " уделен.", Toast.LENGTH_SHORT ).show();
+                    selHuman.mFirstName + " уделен.";
             adapter.remove(selHuman);
         }
+        else {
+            msg = getResources().getString(R.string.nothig_selected);
+        }
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT ).show();
     }
 
     Calendar getDate(DatePicker dp)
@@ -435,11 +443,25 @@ public class MainActivity extends AppCompatActivity {
 
     void rotateScreen()
     {
-        if(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT == getRequestedOrientation()) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }else{
+        SCREEN_ORIENTATION = getRequestedOrientation();
+        SCREEN_ORIENTATION= Math.abs(SCREEN_ORIENTATION); //to Fix undefined screen state
+        if(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE == SCREEN_ORIENTATION) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }else if (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT == SCREEN_ORIENTATION){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
+    }
+
+    void addDummyData(){
+
+        for (int i = 0; i < 5; i++) {
+            Calendar c = Calendar.getInstance();
+            c.set(200+i,3+i,15+i);
+            Human tmp = new Human("firstName"+(i+1), "lastName"+(i+1), (i<3), c);
+            ArrayAdapter <Human> adapter = (ArrayAdapter<Human>) mLvStaff.getAdapter();
+            adapter.add(tmp);
+        }
+
     }
 
 }

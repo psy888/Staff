@@ -18,6 +18,11 @@
         android:orderInCategory="88830"
         app:showAsAction="never"/>
     <item
+        android:id="@+id/addDummyData"
+        android:title="Добавит 5 сотрудников"
+        android:orderInCategory="88835"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/menuItemRotateScreen"
         android:title="@string/menu_rotate"
         android:orderInCategory="88840"
