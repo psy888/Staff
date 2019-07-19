@@ -1,28 +1,28 @@
 <resources>
-    <string name="app_name">Список сотрудников</string>
+    <string name="app_name">List of employees</string>
 
     <!--Menu items -->
-    <string name="menu_add">Добавить</string>
-    <string name="menu_edit">Ркдактировать</string>
-    <string name="menu_remove">Удалить</string>
-    <string name="menu_rotate">Повернуть экран</string>
+    <string name="menu_remove">Delete</string>
+    <string name="menu_rotate">Rotate Screen</string>
 
     <!--Dialog Box -->
-    <string name="dialog_firstName">Имя</string>
-    <string name="dialog_lastName">Фамилия</string>
-    <string name="dialog_gender">Пол</string>
-    <string name="dialog_birthDate">Дата рожд.</string>
-    <string name="dialog_btnNegative">Отменить</string>
-    <string name="dialog_btnPositive">Применить</string>
-    <string name="dialog_titleAdd">Добавить сотрудника</string>
-    <string name="dialog_titleEdit">Редактировать сотрудника</string>
+    <string name="dialog_firstName">First name</string>
+    <string name="dialog_lastName">Last name</string>
+    <string name="dialog_gender">Gender</string>
+    <string name="dialog_birthDate">Birthdate</string>
+    <string name="dialog_btnNegative">Cancel</string>
+    <string name="dialog_btnPositive">Apply</string>
+    <string name="dialog_titleAdd">Add employee</string>
+    <string name="dialog_titleEdit">Edit employee</string>
 
     <!-- Human -->
-    <string name="human_genderMale">Мужской</string>
-    <string name="human_genderFemale">Женский</string>
+    <string name="human_genderMale">Male</string>
+    <string name="human_genderFemale">Female</string>
 
     <!--Toast -->
-    <string name="nothig_selected">Сотрудник не выбран!</string>
-    <string name="toast_warning_birthDate">Дата рождения указана некоректно</string>
-    <string name="toast_warning_emptyField">Фамилия и Имя не могут быть пустыми</string>
+    <string name="nothig_selected">No selection!</string>
+    <string name="toast_warning_birthDate">Birthdate is incorrect!</string>
+    <string name="toast_warning_emptyField">"First and last name can't be empty "</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_edit">Edit</string>
 </resources>

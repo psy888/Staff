@@ -2,6 +2,7 @@ package com.psy.staff;
 
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
      */
     int mCurSelectedPos = -1;
     View mCurSelectedView;
+
+    int mSubSelectedPos = -1;
+    View mSubSelectedView;
     /**
      * Цвет Фона не выбранного элемента
      */
@@ -94,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
         }
         if(mStaff==null)//&&base.exists())\
         {
-            Byte[] buf = new Byte[32];
+            /*
+            //read from file
             try {
                 FileInputStream FIS = openFileInput(BASE);
                 ObjectInputStream OIS = new ObjectInputStream(FIS);
@@ -103,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
+            */
+
+            DbHeleper dbHeleper = new DbHeleper(this, BASE, null, 1);
+            SQLiteDatabase db = dbHeleper.getReadableDatabase();
         }
         //-------------------------------------ADAPTERS-------------------------------------------------
 
@@ -146,14 +156,50 @@ public class MainActivity extends AppCompatActivity {
         mLvStaff.setAdapter(new ArrayAdapter<Human>(this,R.layout.list_view_item,R.id.tvFirstName,mStaff)
         {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                final View view = super.getView(position, convertView, parent);
                 Human human = this.getItem(position);
 
                 TextView tvFirstName = view.findViewById(R.id.tvFirstName);
                 TextView tvLastName = view.findViewById(R.id.tvLastName);
                 TextView tvBirthDate = view.findViewById(R.id.tvBirthDate);
                 ImageView ivGender = view.findViewById(R.id.ivGender);
+
+                final ImageView ivDelete = view.findViewById(R.id.ivDelete);
+                final ImageView ivDots =view.findViewById(R.id.ivDots);
+
+                ivDots.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.GONE);
+                        ivDelete.setVisibility(View.VISIBLE);
+                        if(mCurSelectedView!=null)
+                        {
+                            mCurSelectedView.setBackgroundColor(getResources().getColor(mNrmlColor));
+                        }
+                        if(mSubSelectedView!=null)
+                        {
+                            mSubSelectedView.findViewById(R.id.ivDelete).setVisibility(View.GONE);
+                            mSubSelectedView.findViewById(R.id.ivDots).setVisibility(View.VISIBLE);
+                        }
+                        mCurSelectedPos = position;
+                        mCurSelectedView = view;
+                        mSubSelectedPos = position;
+                        mSubSelectedView = view;
+                    }
+                });
+                ivDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.GONE);
+                        ivDots.setVisibility(View.VISIBLE);
+                        mSubSelectedPos = -1;
+                        mSubSelectedView = null;
+                        removeHuman();
+
+                    }
+                });
+
 
                 if(mCurSelectedPos ==position)
                 {
@@ -191,9 +237,23 @@ public class MainActivity extends AppCompatActivity {
                 if(mCurSelectedPos !=-1)
                 {
                     mCurSelectedView.setBackgroundColor(getResources().getColor(mNrmlColor));
+                    if(mSubSelectedPos!=-1)
+                    {
+                        mSubSelectedView.findViewById(R.id.ivDelete).setVisibility(View.GONE);
+                        mSubSelectedView.findViewById(R.id.ivDots).setVisibility(View.VISIBLE);
+                        mSubSelectedView = null;
+                        mSubSelectedPos = -1;
+                    }
                 }
                 if(mCurSelectedPos == position)
                 {
+                    if(mSubSelectedPos!=-1)
+                    {
+                        mSubSelectedView.findViewById(R.id.ivDelete).setVisibility(View.GONE);
+                        mSubSelectedView.findViewById(R.id.ivDots).setVisibility(View.VISIBLE);
+                        mSubSelectedView = null;
+                        mSubSelectedPos = -1;
+                    }
                     //снимаем выделение с текущего элемента если нажат повторно
                     mCurSelectedView.setBackgroundColor(getResources().getColor(mNrmlColor));
                     mCurSelectedPos = -1;
@@ -203,6 +263,13 @@ public class MainActivity extends AppCompatActivity {
                     mCurSelectedPos = position;
                     mCurSelectedView = view;
                     mCurSelectedView.setBackgroundColor(getResources().getColor(mSlctColor));
+                    if(mSubSelectedPos!=-1)
+                    {
+                        mSubSelectedView.findViewById(R.id.ivDelete).setVisibility(View.GONE);
+                        mSubSelectedView.findViewById(R.id.ivDots).setVisibility(View.VISIBLE);
+                        mSubSelectedView = null;
+                        mSubSelectedPos = -1;
+                    }
                 }
             }
         });
@@ -254,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+/* write to file
         try {
             FileOutputStream FOS = openFileOutput(BASE, MODE_PRIVATE);
 //                    new FileOutputStream(base);
@@ -267,9 +334,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.e("ON DESTROY", e.getMessage());
         }
+        */
+
     }
 
-    //----------------------------------------HELPER METHODS---------------------------------------
+        //----------------------------------------HELPER METHODS---------------------------------------
     void addHuman()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
@@ -465,6 +534,10 @@ public class MainActivity extends AppCompatActivity {
             adapter.add(tmp);
         }
 
+    }
+
+    static void mkToast(String str){
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
 }

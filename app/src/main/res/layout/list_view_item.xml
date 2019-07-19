@@ -12,14 +12,16 @@
         android:id="@+id/ivGender"
         android:layout_gravity="center_vertical"
         android:scaleType="fitCenter"
+        android:background="@drawable/rectangle"
         tools:src="@drawable/female"/>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:minHeight="@dimen/listItemHeight"
+        android:layout_weight="5"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -27,6 +29,7 @@
             android:id="@+id/tvFirstName"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:textColor="#151515"
             android:textSize="@dimen/listItemFontSize"
             tools:text="Bill"/>
         <TextView
@@ -34,6 +37,7 @@
             android:layout_height="0dp"
             android:id="@+id/tvLastName"
             android:layout_weight="1"
+            android:textColor="#151515"
             android:textSize="@dimen/listItemFontSize"
             android:gravity="center_vertical"
             tools:text="Gates"/>
@@ -42,9 +46,27 @@
             android:layout_height="0dp"
             android:id="@+id/tvBirthDate"
             android:layout_weight="1"
+            android:textColor="#151515"
             android:textSize="@dimen/listItemFontSize"
             android:gravity="center_vertical"
             tools:text="01/02/1977"/>
     </LinearLayout>
-
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:src="@drawable/dots"
+    android:layout_weight="1"
+    android:focusable="false"
+    android:id="@+id/ivDots"
+    android:visibility="visible"
+    />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:layout_weight="3"
+        android:src="@drawable/delete"
+        android:visibility="gone"
+        android:id="@+id/ivDelete"/>
 </LinearLayout>

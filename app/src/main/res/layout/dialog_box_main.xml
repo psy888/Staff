@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dialogbg"
     android:stretchColumns="1">
 
     <TableRow
@@ -15,6 +16,7 @@
         <EditText
             android:inputType="text"
             android:maxLines="1"
+            android:textColor="@color/edittext_color_list"
             android:id="@+id/etFirstName"/>
     </TableRow>
     <TableRow
@@ -27,6 +29,7 @@
         <EditText
             android:id="@+id/etLastName"
             android:inputType="text"
+            android:textColor="@color/edittext_color_list"
             android:maxLines="1"/>
     </TableRow>
     <TableRow
@@ -39,7 +42,9 @@
             android:textSize="@dimen/dialogRowLabel"/>
         <Spinner
             android:layout_gravity="center_vertical"
-            android:id="@+id/spGender"/>
+            android:id="@+id/spGender"
+
+            />
     </TableRow>
     <TableRow
         android:layout_margin="@dimen/dialogRowMargin">

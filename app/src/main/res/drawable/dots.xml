@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/dot"
+        android:id="@+id/dotOne"
+        android:top="40dp"
+        />
+    <item
+        android:drawable="@drawable/dot"
+        android:bottom="40dp"
+        android:id="@+id/dotTwo"
+        />
+    <item
+        android:drawable="@drawable/dot"
+        android:gravity="center"
+        android:id="@+id/dotThree"
+        />
+
+</layer-list>

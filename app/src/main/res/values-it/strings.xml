@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elenco dei dipendenti</string>
+    <string name="dialog_titleAdd">Aggiungi dipendente</string>
+    <string name="dialog_titleEdit">Modifica dipendente</string>
+    <string name="dialog_btnPositive">Per applicare</string>
+    <string name="dialog_btnNegative">annullare</string>
+    <string name="dialog_birthDate">Data di nascita</string>
+    <string name="dialog_gender">Genere</string>
+    <string name="dialog_lastName">Cognome</string>
+    <string name="dialog_firstName">Nome</string>
+    <string name="menu_rotate">Ruota lo schermo</string>
+    <string name="menu_remove">cancellare</string>
+    <string name="human_genderMale">maschio</string>
+    <string name="human_genderFemale">femminile</string>
+    <string name="nothig_selected">Nessun dipendente selezionato!</string>
+    <string name="toast_warning_birthDate">La data di nascita non è corretta</string>
+    <string name="toast_warning_emptyField">Cognome e Nome non possono essere vuoti</string>
+    <string name="menu_add">Aggiungere</string>
+    <string name="menu_edit">Per modificare</string>
+</resources>
